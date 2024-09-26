@@ -1,0 +1,30 @@
+[project]
+name = "keyring-gcloud"
+version = "0.1.0"
+authors = [{ name = "Tor Arvid Lund" }]
+description = "A keyring backend for Google Cloud Platform"
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+]
+keywords = ["keyring", "gcloud", "google cloud"]
+dependencies = [
+    "google-auth>=2.35.0",
+    "google>=3.0.0",
+    "keyring>=25.4.1",
+    "requests>=2.32.3",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/torarvid/keyring-gcloud"
+"Bug Tracker" = "https://github.com/torarvid/keyring-gcloud/issues"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
