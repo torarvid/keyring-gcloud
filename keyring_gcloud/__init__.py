@@ -74,7 +74,7 @@ class GoogleCredential:
         self.token = credentials.token  # type: ignore
         self.expiry = datetime.now(timezone.utc) + default_expiry
 
-    def encode(self) -> str:
+    def encode(self) -> str | None:
         """
         Encodes the credentials and returns it as a string.
 
@@ -82,7 +82,10 @@ class GoogleCredential:
         <expiry> is a datetime in ISO format and <token> is the access token as a
         string.
         """
-        assert self.token and self.expiry
+        if self.token is None:
+            return None
+
+        assert self.expiry
 
         access_token_bytes = self.token.encode("ascii")
         encoded_token = base64.b64encode(access_token_bytes).decode("ascii")
@@ -123,14 +126,16 @@ class GoogleCloudKeyring(KeyringBackend):
         cred = GoogleCredential.from_encoded(secret)
         if not cred.valid:
             cred.refresh()
-            self.backend.set_password(service, username, cred.encode())
+            if encoded := cred.encode():
+                self.backend.set_password(service, username, encoded)
         return cred.token
 
     def set_password(self, service: str, username: str, password: str) -> None:
         if self._should_intercept(service, username):
             expiry = datetime.now(timezone.utc) + default_expiry
             cred = GoogleCredential(password, expiry=expiry)
-            password = cred.encode()
+            if encoded := cred.encode():
+                password = encoded
         self.backend.set_password(service, username, password)
 
     def delete_password(self, service: str, username: str) -> None:
