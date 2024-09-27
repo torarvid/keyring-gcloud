@@ -199,7 +199,7 @@ wheels = [
 
 [[package]]
 name = "keyring-gcloud"
-version = "0.1.0"
+version = "0.1.1"
 source = { virtual = "." }
 dependencies = [
     { name = "google" },
@@ -212,7 +212,7 @@ dependencies = [
 requires-dist = [
     { name = "google", specifier = ">=3.0.0" },
     { name = "google-auth", specifier = ">=2.35.0" },
-    { name = "keyring", specifier = ">=25.4.1" },
+    { name = "keyring", specifier = ">=24.3.1" },
     { name = "requests", specifier = ">=2.32.3" },
 ]
 
