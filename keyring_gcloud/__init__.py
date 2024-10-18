@@ -106,9 +106,7 @@ class GoogleCloudKeyring(KeyringBackend):
 
     def _set_backend(self):
         viable_backends = sorted(self.get_viable_backends(), key=lambda b: -b.priority)
-        viable_backends = [
-            b for b in viable_backends if not isinstance(b, GoogleCloudKeyring)
-        ]
+        viable_backends = [b for b in viable_backends if b != GoogleCloudKeyring]
         if len(viable_backends) < 1:
             raise Exception("No viable backends")
 
