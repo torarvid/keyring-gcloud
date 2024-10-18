@@ -1,6 +1,6 @@
 [project]
 name = "keyring-gcloud"
-version = "0.1.2"
+version = "0.1.3"
 authors = [{ name = "Tor Arvid Lund" }]
 description = "A keyring backend for Google Cloud Platform"
 license = { text = "MIT" }

@@ -75,5 +75,8 @@ So a call like
 keyring get https://private-pypi.example.com/simple/ oauth2accesstoken
 ```
 
-would be intercepted (poetry is an example of a service that does this with
-`oauth2accesstoken` as the username).
+would be intercepted. Python tooling sometimes use keyring to fetch credentials
+for private registries. `poetry` is an example of a service that does this with
+`oauth2accesstoken` as the username). `uv` can use keyring if
+`[[tool.uv.index]]` is set to a private registry and the environment variable
+`UV_KEYRING_PROVIDER` is set to `subprocess`.
