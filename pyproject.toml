@@ -1,6 +1,6 @@
 [project]
 name = "keyring-gcloud"
-version = "0.1.3"
+version = "0.1.4"
 authors = [{ name = "Tor Arvid Lund" }]
 description = "A keyring backend for Google Cloud Platform"
 license = { text = "MIT" }
@@ -24,6 +24,9 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/torarvid/keyring-gcloud"
 "Bug Tracker" = "https://github.com/torarvid/keyring-gcloud/issues"
+
+[project.entry-points."keyring.backends"]
+keyring_gcloud = "keyring_gcloud"
 
 [tool.pyright]
 venvPath = "."

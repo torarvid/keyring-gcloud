@@ -12,6 +12,7 @@ import base64
 from datetime import datetime, timedelta, timezone
 from typing import Self
 from keyring.backend import KeyringBackend, get_all_keyring
+from keyring.backends.chainer import ChainerBackend
 from google.auth.transport.requests import Request
 from google.auth.credentials import Credentials
 import google.auth
@@ -106,7 +107,9 @@ class GoogleCloudKeyring(KeyringBackend):
 
     def _set_backend(self):
         viable_backends = sorted(self.get_viable_backends(), key=lambda b: -b.priority)
-        viable_backends = [b for b in viable_backends if b != GoogleCloudKeyring]
+        viable_backends = [
+            b for b in viable_backends if b not in (GoogleCloudKeyring, ChainerBackend)
+        ]
         if len(viable_backends) < 1:
             raise Exception("No viable backends")
 
